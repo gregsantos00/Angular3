@@ -10,8 +10,8 @@
       </div>
     </div>
     <ng-template #formLogin >
-      <div class="col-sm-6 d-flex justify-content-start" [@animacao-login]='estadoBanner'>
-        <app-login (eventEmitter)="exibirPainel($event)"></app-login>
+      <div class="col-sm-6 d-flex justify-content-start" [@animacao-login]='estadoLogin'>
+        <app-login (eventEmitter)="exibirPainel($event)" (eventEmitterLogin)="confirmaLogin($event)"></app-login>
       </div>
     </ng-template>
   </div>

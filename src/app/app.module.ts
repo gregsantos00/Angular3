@@ -8,6 +8,7 @@ import { LoginComponent } from './acesso/login/login.component';
 import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
