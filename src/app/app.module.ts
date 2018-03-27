@@ -9,6 +9,7 @@ import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {Auth} from './shered/auth.service'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [Auth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

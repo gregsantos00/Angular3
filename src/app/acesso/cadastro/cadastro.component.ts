@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from '../../shered/usuario.model'
+import {Auth} from '../../shered/auth.service'
 
 @Component({
   selector: 'app-cadastro',
@@ -18,7 +19,7 @@ export class CadastroComponent implements OnInit {
     'senha': new FormControl(null, [Validators.required])
   })
 
-  constructor() { }
+  constructor(private authService: Auth) { }
 
   ngOnInit() {
   }
@@ -36,6 +37,8 @@ export class CadastroComponent implements OnInit {
       this.formulario.value.senha
     );
     console.log(user);
+
+    this.authService.cadastrarusuario(user);
 
 
   }
