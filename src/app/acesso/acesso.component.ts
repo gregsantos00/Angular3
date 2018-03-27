@@ -30,7 +30,7 @@ import { Component, OnInit, trigger, state, animate, style, transition, keyframe
             style({ offset: 1, opacity: 1, transform: 'translateY(0px)'})
           ]))
       ])
-  ]
+  ])
 })
 export class AcessoComponent implements OnInit {
 
