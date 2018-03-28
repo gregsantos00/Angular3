@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from '../../shered/usuario.model'
-import {Auth} from '../../shered/auth.service'
+import { Auth } from '../../shered/auth.service'
 
 @Component({
   selector: 'app-cadastro',
@@ -29,7 +29,7 @@ export class CadastroComponent implements OnInit {
 
   }
   public cadastrar(): void {
-    
+
     let user = new Usuario(
       this.formulario.value.email,
       this.formulario.value.nome_completo,
@@ -38,7 +38,8 @@ export class CadastroComponent implements OnInit {
     );
     console.log(user);
 
-    this.authService.cadastrarusuario(user);
+    this.authService.cadastrarusuario(user)
+      .then(() => this.eventoEmiter.emit('Login'));
 
 
   }

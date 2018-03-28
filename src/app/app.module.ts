@@ -9,7 +9,12 @@ import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {Auth} from './shered/auth.service'
+import {Auth} from './shered/auth.service';
+import { HomeComponent } from './home/home.component';
+import { PublicacoesComponent } from './home/publicacoes/publicacoes.component'
+
+import  {RouterModule} from '@angular/router'
+import { ROUTERS } from './app.router';
 
 @NgModule({
   declarations: [
@@ -17,13 +22,17 @@ import {Auth} from './shered/auth.service'
     AcessoComponent,
     BannerComponent,
     LoginComponent,
-    CadastroComponent
+    CadastroComponent,
+    HomeComponent,
+    PublicacoesComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(ROUTERS)
+    
   ],
   providers: [Auth],
   bootstrap: [AppComponent]
