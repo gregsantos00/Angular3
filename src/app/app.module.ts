@@ -14,7 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component'
 
 import  {RouterModule} from '@angular/router'
-import { ROUTERS } from './app.router';
+import { ROUTERS, AuthGuard } from './app.router';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { ROUTERS } from './app.router';
     RouterModule.forRoot(ROUTERS)
     
   ],
-  providers: [Auth],
+  providers: [Auth, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

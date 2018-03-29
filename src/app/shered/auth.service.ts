@@ -1,7 +1,15 @@
 import { Usuario } from "./usuario.model";
 import * as fb from 'firebase'
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 
+@Injectable()
 export class Auth {
+
+    public id_token: string = ''
+
+    constructor(private router: Router) { }
+
     public cadastrarusuario(usuario: Usuario): Promise<any> {
 
         return fb.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
@@ -20,9 +28,32 @@ export class Auth {
 
         fb.auth().signInWithEmailAndPassword(email, senha)
             .then((response: any) => {
-                console.log(response);
+                fb.auth().currentUser.getIdToken()
+                    .then((token: string) => {
+                        this.id_token = token
+                        localStorage.setItem('idToken', this.id_token)
+                        this.router.navigate(['/home'])
+                    })
             })
             .catch((erro: Error) => console.log(erro));
 
+    }
+    public autenticado(): boolean {
+
+        if (this.id_token === '' && localStorage.getItem('idToken') !== null) {
+            this.id_token = localStorage.getItem('idToken');
+        }
+        if(this.id_token === ''){
+            this.router.navigate(['/']);
+        }
+        return this.id_token !== '';
+    }
+    public logout(): void {
+        fb.auth().signOut()
+            .then(() => {
+                this.id_token = '';
+                localStorage.removeItem('idToken');
+                this.router.navigate(['/'])
+            });
     }
 }

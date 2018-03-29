@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
+import {Auth} from '../shered/auth.service'
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: Auth) { }
 
   ngOnInit() {
+  }
+
+  public LogOut(): void {
+    this.auth.logout();
   }
 
 }
