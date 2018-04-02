@@ -9,11 +9,11 @@
       <div class="form-group">
         <input type="password" class="form-control" placeholder="Senha" formControlName="senha">
       </div>
-      <button type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="this.formulario.untouched">Entrar</button>
+      <button type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="!this.formulario.valid">Entrar</button>
     </form>
     <hr />
-    <div *ngIf="this.userIvalido">
-      <p class="small text-danger text-center">O nome de usuário inserido não pertence a uma conta. Verifique seu nome de usuário e tente novamente.</p>
+    <div *ngIf="this.mensagemErro !== ''">
+      <p class="small text-danger text-center">{{this.mensagemErro}}</p>
     </div>
   </div>
 </div>

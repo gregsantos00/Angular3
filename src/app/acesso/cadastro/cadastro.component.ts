@@ -12,11 +12,13 @@ export class CadastroComponent implements OnInit {
 
   @Output() public eventoEmiter: EventEmitter<string> = new EventEmitter<string>()
 
+  public mensagemErro: string = ''
+
   public formulario: FormGroup = new FormGroup({
     'nome_completo': new FormControl(null, [Validators.required]),
     'nome_usuario': new FormControl(null, [Validators.required]),
     'email': new FormControl(null, [Validators.required]),
-    'senha': new FormControl(null, [Validators.required])
+    'senha': new FormControl(null, [Validators.required, Validators.minLength(6)])
   })
 
   constructor(private authService: Auth) { }
@@ -39,7 +41,12 @@ export class CadastroComponent implements OnInit {
     console.log(user);
 
     this.authService.cadastrarusuario(user)
-      .then(() => this.eventoEmiter.emit('Login'));
+      .then((erro: string) => {
+        this.eventoEmiter.emit('Login')
+      })
+      .catch((erro: string) => {
+        this.mensagemErro = erro
+      });
 
 
   }

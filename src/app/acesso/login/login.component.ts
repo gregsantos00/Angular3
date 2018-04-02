@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, MinLengthValidator } from '@angular/forms';
 import { Auth } from '../../shered/auth.service';
 
 
@@ -15,9 +15,9 @@ export class LoginComponent implements OnInit {
 
   public formulario: FormGroup = new FormGroup({
     'email': new FormControl(null, [Validators.required]),
-    'senha': new FormControl(null, [Validators.required])
+    'senha': new FormControl(null, [Validators.required, Validators.minLength(6)])
   })
-  public userIvalido: boolean = false;
+  public mensagemErro: string = '';
 
   constructor(
     private auth: Auth
@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
   public confirmarLogin(): void {
     if (this.formulario.valid) {
       this.auth.logar(this.formulario.value.email, this.formulario.value.senha)
+      .then((x: string)=> this.mensagemErro = x)
+      .catch((x: string)=> this.mensagemErro = x)
     }
 
   }

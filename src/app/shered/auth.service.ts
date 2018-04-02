@@ -10,7 +10,7 @@ export class Auth {
 
     constructor(private router: Router) { }
 
-    public cadastrarusuario(usuario: Usuario): Promise<any> {
+    public cadastrarusuario(usuario: Usuario): Promise<string> {
 
         return fb.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
             .then((response: any) => {
@@ -21,21 +21,24 @@ export class Auth {
                 // Registrando informações no Banco
                 fb.database().ref(`usuario_detalhe/${btoa(usuario.email)}`)
                     .set(usuario)
+                return '';
             })
-            .catch((erro: Error) => console.log(erro));
+            //.catch((erro: Error) => { return erro.message });
     }
-    public logar(email: string, senha: string) {
+    public logar(email: string, senha: string): Promise<string> {
 
-        fb.auth().signInWithEmailAndPassword(email, senha)
+        return fb.auth().signInWithEmailAndPassword(email, senha)
             .then((response: any) => {
                 fb.auth().currentUser.getIdToken()
                     .then((token: string) => {
                         this.id_token = token
                         localStorage.setItem('idToken', this.id_token)
                         this.router.navigate(['/home'])
+
                     })
+                return ''
             })
-            .catch((erro: Error) => console.log(erro));
+            .catch((erro: Error) => { return erro.message });
 
     }
     public autenticado(): boolean {
@@ -43,7 +46,7 @@ export class Auth {
         if (this.id_token === '' && localStorage.getItem('idToken') !== null) {
             this.id_token = localStorage.getItem('idToken');
         }
-        if(this.id_token === ''){
+        if (this.id_token === '') {
             this.router.navigate(['/']);
         }
         return this.id_token !== '';
