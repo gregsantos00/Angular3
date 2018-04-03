@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import * as fb from 'firebase'
+import { Repository } from '../../shered/repository.service';
+import { Publicacao } from '../../shered/publicacao.model';
 
 @Component({
   selector: 'app-publicacoes',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublicacoesComponent implements OnInit {
 
-  constructor() { }
+  public lista: Publicacao[] = new Array<Publicacao>()
+  constructor(private repo: Repository) { }
 
   ngOnInit() {
+    fb.auth().onAuthStateChanged((user: any) => {
+
+      this.repo.getPublicacoes(user.email)
+        .then((result: Publicacao[]) => {
+          this.lista = result;
+        });
+    })
   }
 
 }

@@ -15,6 +15,9 @@ import { PublicacoesComponent } from './home/publicacoes/publicacoes.component'
 
 import  {RouterModule} from '@angular/router'
 import { ROUTERS, AuthGuard } from './app.router';
+import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
+import { Repository } from './shered/repository.service';
+import { Progresso } from './shered/progresso.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { ROUTERS, AuthGuard } from './app.router';
     LoginComponent,
     CadastroComponent,
     HomeComponent,
-    PublicacoesComponent
+    PublicacoesComponent,
+    IncluirPublicacaoComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,7 @@ import { ROUTERS, AuthGuard } from './app.router';
     RouterModule.forRoot(ROUTERS)
     
   ],
-  providers: [Auth, AuthGuard],
+  providers: [Auth, AuthGuard, Repository, Progresso],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

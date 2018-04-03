@@ -1,5 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import {Auth} from '../shered/auth.service'
+import { Auth } from '../shered/auth.service'
+
 
 @Component({
   selector: 'app-home',
