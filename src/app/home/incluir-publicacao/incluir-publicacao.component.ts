@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Repository } from '../../shered/repository.service';
 import { Publicacao } from '../../shered/publicacao.model';
@@ -14,6 +14,8 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./incluir-publicacao.component.css']
 })
 export class IncluirPublicacaoComponent implements OnInit {
+
+  @Output() public atualizaTimeLine: EventEmitter<any> = new EventEmitter<any>();
 
   private email: string = ''
   public img: any
@@ -52,6 +54,7 @@ export class IncluirPublicacaoComponent implements OnInit {
         this.porcentagemUpdload = Math.round((this.prog.state.bytesTransferred / this.prog.state.totalBytes) * 100)
         if (this.prog.status !== 'andamento') {
           continua.next(false);
+          this.atualizaTimeLine.emit();
         }
       }
       )

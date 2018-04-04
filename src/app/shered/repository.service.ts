@@ -20,19 +20,19 @@ export class Repository {
                 fb.storage().ref().child(`imagens/${resposta.key}`)
                     .put(pub.img)
                     .on(fb.storage.TaskEvent.STATE_CHANGED,
-                    (snapshot: any) => {
-                        this.prog.status = 'andamento'
-                        this.prog.state = snapshot
+                        (snapshot: any) => {
+                            this.prog.status = 'andamento'
+                            this.prog.state = snapshot
 
-                    },
-                    (erro) => {
+                        },
+                        (erro) => {
 
-                        this.prog.status = 'erro'
-                    },
-                    () => {
-                        this.prog.status = 'completo';
+                            this.prog.status = 'erro'
+                        },
+                        () => {
+                            this.prog.status = 'completo';
 
-                    }
+                        }
                     );
             })
 
@@ -41,6 +41,7 @@ export class Repository {
 
 
         return fb.database().ref(`usuario_detalhe/${btoa(email)}`)
+            .orderByKey()
             .once('value')
             .then((user: any) => {
                 let result: Array<Publicacao> = new Array<Publicacao>();

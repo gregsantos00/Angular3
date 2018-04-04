@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild } from '@angular/core';
 import { Auth } from '../shered/auth.service'
 
 
@@ -9,6 +9,8 @@ import { Auth } from '../shered/auth.service'
 })
 export class HomeComponent implements OnInit {
 
+  @ViewChild('publicacoes') public publicacoes: any;
+
   constructor(private auth: Auth) { }
 
   ngOnInit() {
@@ -17,5 +19,8 @@ export class HomeComponent implements OnInit {
   public LogOut(): void {
     this.auth.logout();
   }
-
+  public atualizaTimeLine(): void {
+    this.publicacoes.atualizaTimeLine();
+    //    console.log('OK');
+  }
 }
